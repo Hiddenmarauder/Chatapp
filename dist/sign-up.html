@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+  </style>
+</head>
+
+<body class="shadow">
+  <div class="min-h-screen flex items-center justify-center bg-gray-100  shadow">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-2xl font-bold mb-6">Sign Up</h2>
+      <form id="signUpForm" class="space-y-4" action="/signup" method="POST">
+        <div>
+          <label for="email" class="block font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" class="border border-gray-300 px-3 py-2 rounded w-full">
+        </div>
+        <div>
+          <label for="username" class="block font-medium text-gray-700">Username</label>
+          <input type="text" id="username" name="username" class="border border-gray-300 px-3 py-2 rounded w-full">
+        </div>
+        <div>
+          <label for="password" class="block font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" class="border border-gray-300 px-3 py-2 rounded w-full">
+        </div>
+        <div>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full";>Sign Up <link rel="stylesheet" href="sign-in.html"></link></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signUpForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Perform sign-up logic here
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      // Do something with the form data, such as sending it to the server for registration
+      console.log('Email:', email);
+      console.log('Username:', username);
+      console.log('Password:', password);
+
+      app.post('/signup', async (req, res) => {
+  try {
+    const { email, username, password } = req.body;
+
+    // Create a new user document
+    const user = new User({
+      email,
+      username,
+      password,
+    });
+
+    // Save the user to the database
+    await user.save();
+
+    res.status(200).send('User registered successfully!');
+  } catch (error) {
+    res.status(500).send('An error occurred during registration.');
+  }
+});
+
+    });
+  </script>
+  <script src="server.js"></script>
+</body>
+
+</html>
