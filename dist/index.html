@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat App</title>
-  <link rel="stylesheet" type="text/css" href="output.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" 
+  <link rel="stylesheet" type="text/css" href="output.css"> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" 
   rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+ 
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -13,10 +14,30 @@
  <script src="passport.js"></script>
  <script src="app.js"></script>
  <style>
+    
+    
+    @media (max-width:768px) {
+      body {
+        font-size:14px;
 
-    @media (max-width: 768px) {
-      #chat-container{
-        max-height: auto;
+    
+      }
+    }
+    /* css style for mobile*/
+    @media (max-width: 480px) { 
+      body {
+        height: 100%;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 350px){
+      #chat-container  {
+        height: 100px;
+
+      }
+      #message-input {
+        max-width: 100%;
       }
     }
     
@@ -24,41 +45,14 @@
       overflow: hidden;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       margin: 0;
       background-color: black;
-    }
-
-    #matrix-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .matrix-code {
-      font-family: monospace;
-      color: green;
       font-size: 16px;
-      line-height: 1;
-      white-space: nowrap;
-      opacity: 0.8;
-      position: absolute;
-      top: -50px;
     }
 
-    @keyframes matrix-rain {
-      0% {
-        transform: translateY(-100%);
-      }
-      100% {
-        transform: translateY(100%);
-      }
-    }
+  
+
+
     #con2 {
       margin-top: 100px;
     }
@@ -71,37 +65,41 @@
     }
 
     #send-button {
-      margin-left: 415px;
+      margin-left: 30px;
       margin-top: -63px;
+      width: 3rem;
       
       
     }
     #message-input {
+      width: 250px;
       padding: 0 auto;
-      margin-top: 5px;
-      margin-left: 250px;
-      flex-shrink: 0;
-      
+      margin-top: 450px;
+      margin-left: 130px;
+      flex-shrink: 0% ;
+      border-radius: 10px;
+      overflow-block: 0;
+      justify-self: flex-en;
 
     }
 
     #chat-messages {
       max-width: 400px;
-      max-height: auto;
-      border: 1px solid white;
+      max-height: 456px ;
+      border-radius: 5%;
       overflow-y: auto;
-      overflow-x: auto;
-      scrollbar-width: thin;
+      scrollbar-width: none;
       margin: 0 auto;
       padding: auto;
-      height: 400px;
+      height: 500px;
       display: flex;
       flex-direction: column;
       padding: 8px;
     }
 
     #chat-messages::-webkit-scrollbar {
-      width: 8px;
+      width: 0rem;
+      height: 0rem;
     }
     
     #chat-messages .sender {
@@ -111,6 +109,8 @@
 
     #chat-messages .message-body {
       font-size: small;
+      justify-content: start;
+      
 
     }
 
@@ -120,78 +120,107 @@
       margin-left: 0.5rem;
     }
 
-     #chat-container {
-      
-     }
+    #chat-container { 
+     height: 1000px;
+     width: auto;
+    }
+
+
+    #input-con {
+      position: fixed;
+    }
+
+       
  </style>
+
+
 
 <body class="bg-dark">
 
 <div id="chat-container">
-  <div id="con1" >
+     <section id="con1" >
     <h2 class="bg-gradient text-lg-center">
     <h1 class="shadow-sm text-center text-danger form-control-plaintext">S P A C E
     </h1></h2>
-  </div>
+    </section>
 
-   <div id="chat-messages" class="text-success shadow-lg bg-gradient     form-control-plaintext" ">
+   <div id="chat-messages" class="text-success shadow-lg bg-gradient     form-control-plaintext" >
       <span class="sender"></span>
       <span class="message-body "></span>
       <span class="timestamp"></span>
-    </div>
+      <div id="input-con">
+      <input class=" shadow-lg   input-group-text  shadow   " type="text"   id="message-input" placeholder="Type.......">
+        <i class="bi bi-chat-right-fill"></i>
+         <button class="btn shadow bg-gradient ", id="send-button" ><svg xmlns="http://www.w3.org/2000/SVG" width="16" height="16" fill="currentColor" class="bi bi-chat-right-fill" viewBox="0 0 16 16">
+           <path d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+         </svg></button></div>
+      </div>
+     
+   </div>
+   
   
 
 
-  <div class="position-fixed"><input class=" bg-gradient  input-group-text  shadow    form-control-" type="text"   id="message-input" placeholder="Type.......">
-   <i class="bi bi-chat-right-fill"></i>
-    <button class="btn shadow bg-gradient ", id="send-button" ><svg xmlns="http://www.w3.org/2000/SVG" width="16" height="16" fill="currentColor" class="bi bi-chat-right-fill" viewBox="0 0 16 16">
-      <path d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-    </svg></button>
-  </div>
+  
    
-  </div> 
-
-  </div>
 
 </div>
+
     <script>
-      function createMatrixRain() {
-        const codeChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        const columns =Math.floor(window.innerWidth / 20);
 
-        for (let i = 0; i < columns; i++) {
-          const column = document.createElement("div");
-          column.className = "matrix-column";
+       // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-          for (let j = 0; j < 20; j++){
-            const codeChar = document.createElement("span");
-            codeChar.innerText = codeChar.charAt(Math.floor(Math.random() * codeChar.length));
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-            column.appendChild(codeChar);
-          }
-          document.body.appendChild(column);
-        }
-      }
+firebase.initializeApp(firebaseConfig);
 
-      function animateMatrixRain() {
-        const matrixCodes = document.querySelectorAll(".matrix-code");
-        let position = 0;
+// Redirect based on authentication status
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in
+    window.location.href = "index.html";
+  } else {
+    // User is not signed in
+    var path = window.location.pathname;
+    if (path !== "/signup.html" && path !== "/signin.html") {
+      // Redirect to the sign-in page if not already on it
+      window.location.href = "signin.html";
+    }
+  }
+});
 
-        setInterval(() => {
-          matrixCodes.forEach((code) => {
-            const top = position * 20;
-            code.style.top = '${top}px';
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in
+    var userId = user.uid;
+    // Store or use the userId as needed
+  } else {
+    // User is signed out
+    // Handle the sign-out case if required
+  }
+});
 
-            if (top > window.innerHeight) {
-              code.innerText = code.innerText = codeChar.charAt(Math.floor(Math.random() * codeChar.lenght));
-              code.style.top = "-50px";
-            }
-          });
-          position++;
-        }, 50);
-      }
-       createMatrixRain();
-       animateMatrixRain();
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAxLNqEldNGRsFYrCZtRNtjpER-L-wsRU4",
+  authDomain: "chatapp-ui.firebaseapp.com",
+  projectId: "chatapp-ui",
+  storageBucket: "chatapp-ui.appspot.com",
+  messagingSenderId: "110183490546",
+  appId: "1:110183490546:web:cb37b2626bd73e18a5816b",
+  measurementId: "G-M8TPN46NB2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
     </script>
   
   
