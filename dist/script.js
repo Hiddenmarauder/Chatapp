@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function() {
   
         var senderElement = document.createElement('span');
         senderElement.classList.add('sender');
-        senderElement.textContent = 'User: '; // Replace with actual sender name
+        senderElement.textContent = 'User:  '; // Replace with actual sender name
         messageElement.appendChild(senderElement);
   
         var textElement = document.createElement('span');
