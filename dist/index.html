@@ -132,7 +132,25 @@ admin.initializeApp({
   databaseURL: "https://chatapp-ui-default-rtdb.firebaseio.com"
 });
 
+
+var database = firebase.database();
+var messagesRef = database.ref("messages"); // Assuming "messages" is the path in your database
+messagesRef.push().set({
+  text: "Hello, World!",
+  timestamp: Date.now()
+});
+
+messagesRef.on("child_added", function(snapshot) {
+  var message = snapshot.val();
+  console.log("New message:", message.text);
+});
+
+
+
+
  </script>
+
+
 
 </body>
 </html>
