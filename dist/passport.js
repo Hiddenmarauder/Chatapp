@@ -4,32 +4,34 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 
 // Configure Passport with the LocalStrategy
-passport.use(new LocalStrategy(
-   {
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({ email });
 
-    usernameField: 'email',
-    passwordField: 'password'
-  },
+        if (!user) {
+          return done(null, false, { message: 'Invalid email.' });
+        }
 
-  function(username, password, done) {
-    User.findOne({ email: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Invalid username.' });
+        const isValidPassword = await user.validatePassword(password);
+
+        if (!isValidPassword) {
+          return done(null, false, { message: 'Invalid password.' });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
       }
-      if (!user.validatePassword(password)) {
-        return done(null, false, { message: 'Invalid password.' });
-      }
-      return done(null, user);
-    });
-  }
-    
-));
+    }
+  )
+);
 
-// Add authentication middleware to your routes
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/index.html',
-  failureRedirect: '/404.html',
-  failureFlash: true
-})); 
+module.exports = passport;
+
 
