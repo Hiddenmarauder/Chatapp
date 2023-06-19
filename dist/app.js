@@ -1,7 +1,6 @@
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import { initialize, session as _session } from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
 const app = express();
@@ -17,18 +16,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Passport configuration
 passport.use(new LocalStrategy());
-app.post('/messages', (req, res) => {
+
+app.post('/messages', (_, res) => {
   // Logic to store the message in the database
   // Retrieve the message from the request body and save it in the database
   // Send a response indicating success or failure
 });
 
 // Add a route for retrieving messages
-app.get('/messages', (req, res) => {
+app.get('/messages', (_, res) => {
   // Logic to retrieve messages from the database
   // Retrieve the messages from the database and send them as a response
-}); 
-// Rest of your code...
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
 
 

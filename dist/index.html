@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Chat UI Responsive</title>
+  <title>Chat App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'><link rel="stylesheet" href="./style2.css">
 
@@ -11,26 +11,6 @@
 <!-- partial:index.partial.html -->
 <div class="--dark-theme" id="chat">
   <div class="chat__conversation-board">
-
-    <div class="chat__conversation-board__message-container reversed">
-      <div class="chat__conversation-board__message__options">
-        <button class="btn-icon chat__conversation-board__message__option-button option-item emoji-button">
-          <svg class="feather feather-smile sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-          </svg>
-        </button>
-        <button class="btn-icon chat__conversation-board__message__option-button option-item more-button">
-          <svg class="feather feather-more-horizontal sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="1"></circle>
-            <circle cx="19" cy="12" r="1"></circle>
-            <circle cx="5" cy="12" r="1"></circle>
-          </svg>
-        </button>
-      </div>
-    </div>
   </div>
   <div class="chat__conversation-panel">
     <div class="chat__conversation-panel__container">
@@ -72,38 +52,6 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-firebase.initializeApp(firebaseConfig);
-
-// Redirect based on authentication status
-firebase.auth().onAuthStateChanged(function(user) {
-if (user) {
- // User is signed in
- window.location.href = "index.html";
-} else {
- // User is not signed in
- var path = window.location.pathname;
- if (path !== "/signup.html" && path !== "/signin.html") {
-   // Redirect to the sign-in page if not already on it
-   window.location.href = "signin.html";
- }
-}
-});
-
-firebase.auth().onAuthStateChanged(function(user) {
-if (user) {
- // User is signed in
- var userId = user.uid;
- // Store or use the userId as needed
-} else {
- // User is signed out
- // Handle the sign-out case if required
-}
-});
-
-
-
 const firebaseConfig = {
 apiKey: "AIzaSyAxLNqEldNGRsFYrCZtRNtjpER-L-wsRU4",
 authDomain: "chatapp-ui.firebaseapp.com",
@@ -115,18 +63,45 @@ measurementId: "G-M8TPN46NB2"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig);
 
+// Redirect based on authentication status
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in
+    window.location.href = "index.html";
+  } else {
+    // User is not signed in
+    var path = window.location.pathname;
+    if (path !== "/signup.html" && path !== "/signin.html") {
+      // Redirect to the sign-in page if not already on it
+      window.location.href = "signin.html";
+    }
+  }
+});
 
-function getID(){
-document.getElementById('body').innerHTML 
-};
+// Wait for the DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the authentication state
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in
+      var userId = user.uid;
+      // Store or use the userId as needed
+      console.log("User is signed in. User ID:", userId);
+      // Redirect to the chat UI or perform any other necessary actions
+      // ...
+    } else {
+      // User is signed out
+      console.log("User is signed out");
+      // Redirect to the sign-in page or perform any other necessary actions
+      // ...
+    }
+  });
+});
 
-
-
+// Firebase Admin SDK initialization (for server-side usage)
 var admin = require("firebase-admin");
-
 var serviceAccount = require("path/to/serviceAccountKey.json");
 
 admin.initializeApp({
@@ -134,7 +109,7 @@ admin.initializeApp({
   databaseURL: "https://chatapp-ui-default-rtdb.firebaseio.com"
 });
 
-
+// Firebase Realtime Database usage
 var database = firebase.database();
 var messagesRef = database.ref("messages"); // Assuming "messages" is the path in your database
 messagesRef.push().set({
@@ -146,6 +121,7 @@ messagesRef.on("child_added", function(snapshot) {
   var message = snapshot.val();
   console.log("New message:", message.text);
 });
+
 
 
 

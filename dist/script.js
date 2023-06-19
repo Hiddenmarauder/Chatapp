@@ -67,48 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-
-        // Get the emoji button element
-var emojiButton = document.getElementById('emoji-button');
-
-// Add event listener to the emoji button
-emojiButton.addEventListener('click', function() {
-  // Open the emoji modal or popover
-  openEmojiModal();
-});
-
-// Function to open the emoji modal
-function openEmojiModal() {
-  // Show the emoji selection modal
-  // You can implement your own logic to display a modal or popover with emoji options
-  // For example, you can create a hidden div with a list of emojis and show it as a modal when the emoji button is clicked
-  var emojiModal = document.getElementById('emoji-modal');
-  emojiModal.style.display = 'block';
-
-  // Add event listener to the emoji options
-  var emojiOptions = emojiModal.getElementsByClassName('emoji-option');
-  for (var i = 0; i < emojiOptions.length; i++) {
-    emojiOptions[i].addEventListener('click', function() {
-      // Get the selected emoji
-      var selectedEmoji = this.textContent;
-
-      // Set the selected emoji as the value of the input field or use it in any other way you need
-      inputField.value += selectedEmoji;
-
-      // Close the emoji modal or popover
-      closeEmojiModal();
-    });
-  }
-}
-
-// Function to close the emoji modal
-function closeEmojiModal() {
-  // Hide the emoji selection modal
-  var emojiModal = document.getElementById('emoji-modal');
-  emojiModal.style.display = 'none';
-};
-
-  
   // Check if the user is signed in
 var isAuthenticated = checkUserAuthentication(); // Replace this with your own authentication check logic
 
