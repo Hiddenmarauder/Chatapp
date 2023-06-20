@@ -72,7 +72,7 @@ var isAuthenticated = checkUserAuthentication(); // Replace this with your own a
 
 // Redirect based on authentication status
 if (isAuthenticated) {
-  window.location.href = 'chat.html'; // Redirect to the chat UI page
+  window.location.href = 'x.html'; // Redirect to the chat UI page
 } else {
-  window.location.href = 'signin.html'; // Redirect to the signin page
+  window.location.href = 'index.html'; // Redirect to the signin page
 };

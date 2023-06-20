@@ -34,8 +34,8 @@ app.get('/signin', (_, res) => {
 
 // Add authentication route
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/index.html',
-  failureRedirect: '/signup.html',
+  successRedirect: '/x.html',
+  failureRedirect: '/index.html',
   failureFlash: true
 }));
 
