@@ -52,6 +52,7 @@
   <script src="app.js"></script>
   <script src="passport.js"></script>
   <script src="server.js"></script>
+  
   <script>
 
     // Import the functions you need from the SDKs you need
@@ -71,19 +72,21 @@ messagingSenderId: "110183490546",
 appId: "1:110183490546:web:cb37b2626bd73e18a5816b",
 measurementId: "G-M8TPN46NB2"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+
+
 // Redirect based on authentication status
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in
-    window.location.href = "index.html";
+    window.location.href = "x.html";
   } else {
     // User is not signed in
     var path = window.location.pathname;
-    if (path !== "/signup.html" && path !== "/signin.html") {
+    if (path !== "/index.html" && path !== "/signin.html") {
       // Redirect to the sign-in page if not already on it
       window.location.href = "signin.html";
     }
@@ -145,7 +148,7 @@ messagesRef.on("child_added", function(snapshot) {
 
 
  </script>
- 
+
 <script>
   
 import { createPicker } from 'emoji-mart';
