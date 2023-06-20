@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Firebase Admin SDK initialization (for server-side usage)
 var admin = require("firebase-admin");
-var serviceAccount = require("path/to/serviceAccountKey.json");
+var serviceAccount = require("./public/chatapp-ui-firebase-adminsdk-fv5tl-42f72f7f83.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -145,6 +145,7 @@ messagesRef.on("child_added", function(snapshot) {
 
 
  </script>
+ 
 <script>
   
 import { createPicker } from 'emoji-mart';
