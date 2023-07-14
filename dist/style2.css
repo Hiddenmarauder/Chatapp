@@ -238,7 +238,7 @@ body {
   position: relative;
   color: var(--chat-text-color);
   font-size: 13px;
-  background: transparent;
+  background: transparent !important;
   border: 0;
   font-family: "Lato", sans-serif;
   resize: none;

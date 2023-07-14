@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var sendButton = document.querySelector('.send-message-button');
   
     // Add event listener to the send button
-    sendButton.addEventListener('click', function() {
+    sendButton.addEventListener('click',function() {
       // Get the input value
       var message = inputField.value;
   
@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Create the nickname element
       var nicknameElement = document.createElement('span');
       nicknameElement.classList.add('chat__conversation-board__message__person__nickname');
-
+      
+      //Create a random Avatar element
       var randomAvatarNumber = Math.floor(Math.random() * 10);
       avatarElement.style.backgroundImage = `url(https://randomuser.me/api/portraits/lego/${randomAvatarNumber}.jpg)`;
   

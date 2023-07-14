@@ -38,7 +38,7 @@
         </svg>
       </button>
       <input id="emojiInput" class="chat__conversation-panel__input panel-item" placeholder="Type a message..."/>
-      <button class="chat__conversation-panel__button panel-item btn-icon send-message-button">
+      <button onclick="click()" class="chat__conversation-panel__button panel-item btn-icon send-message-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-reactid="1036">
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -54,104 +54,6 @@
   <script src="server.js"></script>
   
   <script>
-
-    // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-apiKey: "AIzaSyAxLNqEldNGRsFYrCZtRNtjpER-L-wsRU4",
-authDomain: "chatapp-ui.firebaseapp.com",
-projectId: "chatapp-ui",
-storageBucket: "chatapp-ui.appspot.com",
-messagingSenderId: "110183490546",
-appId: "1:110183490546:web:cb37b2626bd73e18a5816b",
-measurementId: "G-M8TPN46NB2"
-};
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-
-
-// Redirect based on authentication status
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in
-    window.location.href = "x.html";
-  } else {
-    // User is not signed in
-    var path = window.location.pathname;
-    if (path !== "/index.html" && path !== "/signin.html") {
-      // Redirect to the sign-in page if not already on it
-      window.location.href = "signin.html";
-    }
-  }
-
-
-});
-
-// Get a list of cities from your database
-async function getCities(db) {
-  const citiesCol = collection(db, 'cities');
-  const citySnapshot = await getDocs(citiesCol);
-  const cityList = citySnapshot.docs.map(doc => doc.data());
-  return cityList;
-}
-
-// Wait for the DOM to load
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the authentication state
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in
-      var userId = user.uid;
-      // Store or use the userId as needed
-      console.log("User is signed in. User ID:", userId);
-      // Redirect to the chat UI or perform any other necessary actions
-      // ...
-    } else {
-      // User is signed out
-      console.log("User is signed out");
-      // Redirect to the sign-in page or perform any other necessary actions
-      // ...
-    }
-  });
-});
-
-// Firebase Admin SDK initialization (for server-side usage)
-var admin = require("firebase-admin");
-var serviceAccount = require("./public/chatapp-ui-firebase-adminsdk-fv5tl-42f72f7f83.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://chatapp-ui-default-rtdb.firebaseio.com"
-});
-
-// Firebase Realtime Database usage
-var database = firebase.database();
-var messagesRef = database.ref("messages"); // Assuming "messages" is the path in your database
-messagesRef.push().set({
-  text: "Hello, World!",
-  timestamp: Date.now()
-});
-
-messagesRef.on("child_added", function(snapshot) {
-  var message = snapshot.val();
-  console.log("New message:", message.text);
-});
-
-
-
- </script>
-
-<script>
-  
-import { createPicker } from 'emoji-mart';
 
 // Get references to the input field and the emoji button
 const emojiInput = document.getElementById('emojiInput');
@@ -170,6 +72,15 @@ emojiButton.addEventListener('click', () => {
   // Open the emoji picker when the button is clicked
   picker.openPicker();
 });
+
+
+ </script>
+
+<script>
+  
+
+
+
 </script>
 
 
